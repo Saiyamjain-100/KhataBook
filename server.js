@@ -27,11 +27,6 @@ app.get('*',function(req,res){
 });
 
 
-
-client.connect(err => {
-      if(err){ console.error(err); return false;}
-      // connection to mongo is successful, listen for requests
-      app.listen(PORT, () => {
-          console.log("listening for requests");
-      })
-  });
+app.listen(PORT, ()=>{
+      console.log(`server running on port ${PORT}`)
+});
