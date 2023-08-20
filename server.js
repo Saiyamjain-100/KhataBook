@@ -11,6 +11,7 @@ connectDb()
 
 
 const app = express();
+let PORT = 8080 || process.env.PORT;
 
 app.use(morgan('dev'));
 app.use(express.json());
@@ -25,8 +26,12 @@ app.get('*',function(req,res){
       res.sendFile(path.join(__dirname,'./client/build.index.html'))
 });
 
-let PORT = 8080 || process.env.PORT;
 
-app.listen(PORT, ()=>{
-      console.log(`server running on port ${PORT}`)
-});
+
+client.connect(err => {
+      if(err){ console.error(err); return false;}
+      // connection to mongo is successful, listen for requests
+      app.listen(PORT, () => {
+          console.log("listening for requests");
+      })
+  });
